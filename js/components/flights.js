@@ -1,36 +1,28 @@
 import React from 'react';
+import Flight from './flight';
 
 export default class Flights extends React.Component {
   constructor(props) {
     super(props);
-    this.state.data = [];
-    console.log(this.props);
+    this.state = {
+      data: [],
+      url: '/js/data/flight_data.json'
+    };
   }
 
   componentDidMount() {
-    this.loadFlightsFromServer();
-    console.log(this.state.data);
-  }
-
-  loadFlightsFromServer() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      success: function(data) {
-        console.log(data);
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
+    var getFlights = function(url) {
+      return fetch(url).then(response => response.json())
+    };
+    getFlights(this.state.url).then((data) => {
+      this.setState({data});
     });
   }
 
   render() {
-    return (
-      <ul>
-        <li></li>
-      </ul>
-    )
+    var flights = this.state.data.map((flight, i) =>
+      <li key={i}><Flight raw={flight} /></li>
+    );
+    return <ul>{flights}</ul>;
   }
 }

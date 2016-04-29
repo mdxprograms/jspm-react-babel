@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import 'fetch';
 
 import Header from './header';
 import Flights from './flights';
@@ -8,28 +8,16 @@ import Flights from './flights';
 // Your wrapper for everything - attach it to the body , or the container.
 // Import your main sections into here
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: []
-    }
+  constructor(props) {
+    super(props);
   }
-
-  // componentDidMount() {
-  //   flights(this.props.user).then((repos) => {
-  //     this.setState({ repos });
-  //   });
-  // }
 
   render() {
     return (
       <div>
-
         <Header />
-
-        <Flights url="/js/data/flight_data.json" />
-
+        <Flights />
       </div>
-    )
+    );
   }
 }
