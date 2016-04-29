@@ -10,6 +10,7 @@
   "license": "ISC",
   "jspm": {
     "dependencies": {
+      "fetch": "npm:whatwg-fetch@^1.0.0",
       "react": "npm:react@^15.0.1",
       "react-dom": "npm:react-dom@^15.0.1"
     },
